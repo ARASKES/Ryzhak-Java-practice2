@@ -8,12 +8,11 @@ import java.util.Scanner;
 
 public class Cat extends Feline
 {
-    static public  HashSet<Cat> catSet = new HashSet<Cat>(); // Task 4
     static public ArrayList<Cat> cats = new ArrayList<>();  // Task 3
+    static public HashSet<Cat> catSet; // Task 4
 
     private Cat mom, dad;   // Task 2
     private String name;
-
 
     public Cat(Scanner input)
     {
@@ -43,6 +42,7 @@ public class Cat extends Feline
                 mom = null;
                 break;
         }
+
         cats.add(this);
     }
 
@@ -54,16 +54,27 @@ public class Cat extends Feline
 
     public static void createCats(Scanner input)
     {
+        catSet = new HashSet<>();
+
         System.out.println("Enter the amount of cats to add to the set:");
         int catAmount = input.nextInt();
-        input.nextLine();
         for (int i = 0; i < catAmount; i++)
         {
             catSet.add(new Cat(input));
         }
     }
 
-    public static void printCats()
+    public static void printCatsFromList()
+    {
+        System.out.println("All the cats:");
+        for (Cat cat : cats)
+        {
+            System.out.printf("%s ", cat.GetName());
+        }
+        System.out.println();
+    }
+
+    public static void printCatsFromHashSet()
     {
         System.out.println("Cats from the set:");
         for (Cat cat : catSet)

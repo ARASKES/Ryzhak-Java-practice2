@@ -1,6 +1,6 @@
 package com.bsbo_04_19.ryzhak;
 
-import com.bsbo_04_19.ryzhak.Task_1.Lion;
+import com.bsbo_04_19.ryzhak.Task_1.*;
 import com.bsbo_04_19.ryzhak.Task_2.Cat;
 
 import java.io.IOException;
@@ -24,34 +24,34 @@ public class Main
                     lion.Voice();
                     break;
                 case "2":
-                    Cat daughterCat = new Cat(input),
-                        sonCat = new Cat(input),
-                        motherCat = daughterCat.GetMother(),
-                        fatherCat = daughterCat.GetFather(),
-                        grannyCat = motherCat.GetMother(),
-                        granpaCat = fatherCat.GetFather();
+                    try
+                    {
+                        Cat daughterCat = new Cat(input),
+                            sonCat = new Cat(input),
+                            motherCat = daughterCat.GetMother(),
+                            fatherCat = daughterCat.GetFather(),
+                            grannyCat = motherCat.GetMother(),
+                            grandpaCat = fatherCat.GetFather();
 
-                    System.out.printf("Son's name: %s\n", sonCat.GetName());
-                    System.out.printf("Daughter's name: %s\n", daughterCat.GetName());
-                    System.out.printf("Mother's name: %s\n", motherCat.GetName());
-                    System.out.printf("Father's name: %s\n", fatherCat.GetName());
-                    System.out.printf("Granny's name: %s\n", grannyCat.GetName());
-                    System.out.printf("Granpa's name: %s\n", granpaCat.GetName());
-
-                    Cat.cats.clear();
+                        System.out.printf("Son's name: %s\n", sonCat.GetName());
+                        System.out.printf("Daughter's name: %s\n", daughterCat.GetName());
+                        System.out.printf("Mother's name: %s\n", motherCat.GetName());
+                        System.out.printf("Father's name: %s\n", fatherCat.GetName());
+                        System.out.printf("Granny's name: %s\n", grannyCat.GetName());
+                        System.out.printf("Grandpa's name: %s\n", grandpaCat.GetName());
+                    }
+                    catch (NullPointerException e)
+                    {
+                        System.out.print("Needed parent is absent!");
+                    }
                     break;
                 case "3":
                     for (int i = 0; i < 10; i++)
                     {
-                        Cat.cats.add(new Cat(input));
+                        new Cat(input);
                     }
 
-                    System.out.println("All the cats:");
-                    for (Cat cat : Cat.cats)
-                    {
-                        System.out.printf("%s ", cat.GetName());
-                    }
-                    System.out.println();
+                    Cat.printCatsFromList();
 
                     Cat.cats.clear();
                     break;
@@ -59,18 +59,20 @@ public class Main
                     Cat.createCats(input);
 
                     Cat catToRemove = null;
-                    int k = 0;
+                    int number = 1;
                     for (Cat cat : Cat.catSet)
                     {
-                        if (k == Cat.catSet.size() - 1)
+                        if (number == Cat.catSet.size())
                         {
                             catToRemove = cat;
                         }
-                        k++;
+                        number++;
                     }
                     Cat.catSet.remove(catToRemove);
 
-                    Cat.printCats();
+                    Cat.printCatsFromHashSet();
+
+                    Cat.catSet.clear();
                     break;
                 case "exit":
                     input.close();
